@@ -12,6 +12,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Workout App'),
+      ),
+      body: Text("Home"),
       bottomNavigationBar: Container(
         color: Colors.black,
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
@@ -32,15 +36,12 @@ class _HomePageState extends State<HomePage> {
             GButton(icon: Icons.favorite_border, iconColor: Colors.white,
              text:'Likes',
             ),
-            GButton(icon: Icons.search,iconColor: Colors.white,
-             text:'Search',
-            ),
             GButton(icon: Icons.settings,iconColor: Colors.white,
              text:'Setting',
             ),
           ],
         ),
-      ) 
+      ),
     );
   }
 }
