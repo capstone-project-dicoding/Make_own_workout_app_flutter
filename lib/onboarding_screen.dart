@@ -34,7 +34,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                 onLastPage = (index == 2);
               });
             },
-            children: [
+            children: const [
               IntroPageOne(),
               IntroPageTwo(),
               IntroPageThree(),
@@ -53,7 +53,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                   onTap: () {
                     _controller.jumpToPage(2);
                   },
-                  child: Text('Skip'),
+                  child: const Text('Lewati'),
                 ),
 
                 // dot indicator
@@ -66,21 +66,22 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
+                              // ignore: non_constant_identifier_names
                               builder: (Context) {
-                                return HomePage();
+                                return const HomePage();
                               },
                             ),
                           );
                         },
-                        child: Text('Done'))
+                        child: const Text('Mulai'))
                     : GestureDetector(
                         onTap: () {
                           _controller.nextPage(
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             curve: Curves.easeIn,
                           );
                         },
-                        child: Text('Next'),
+                        child: const Text('Lanjut'),
                       ),
               ],
             ),

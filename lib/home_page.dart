@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -13,9 +14,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Workout App'),
+        title: const Text('Workout App'),
       ),
-      body: Text("Home"),
+      body: const Text("Home"),
       bottomNavigationBar: Container(
         color: Colors.black,
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
@@ -26,9 +27,13 @@ class _HomePageState extends State<HomePage> {
           tabBackgroundColor:  Colors.grey.shade700,
           gap: 5,
           onTabChange: (index){
-             print(index);
+             if (kDebugMode) {
+               if (kDebugMode) {
+                 print(index);
+               }
+             }
           },
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           tabs: const [
             GButton(icon: Icons.home,iconColor: Colors.white,
             text: 'Home',
