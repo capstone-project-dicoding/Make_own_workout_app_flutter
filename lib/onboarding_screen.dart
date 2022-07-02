@@ -4,7 +4,7 @@ import 'package:make_own_workout/introduce_screens/intro_page_three.dart';
 import 'package:make_own_workout/introduce_screens/intro_page_two.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'home_page.dart';
+import 'main_page.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -68,7 +68,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
                             MaterialPageRoute(
                               // ignore: non_constant_identifier_names
                               builder: (Context) {
-                                return const HomePage();
+                                return const MainPage();
                               },
                             ),
                           );
