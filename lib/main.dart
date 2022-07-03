@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:make_own_workout/common/constants.dart';
 import 'package:make_own_workout/common/utils.dart';
 import 'package:make_own_workout/main_page.dart';
 import 'package:make_own_workout/onboarding_screen.dart';
