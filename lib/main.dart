@@ -1,10 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:make_own_workout/common/constants.dart';
-import 'package:make_own_workout/common/utils.dart';
+import 'package:make_own_workout/common/navigation.dart';
+import 'package:make_own_workout/data/api/api_service.dart';
+import 'package:make_own_workout/data/preferences/preferences_helper.dart';
 import 'package:make_own_workout/presentation/main_page.dart';
 import 'package:make_own_workout/presentation/splash_page.dart';
+import 'package:make_own_workout/provider/mow_provider.dart';
+import 'package:make_own_workout/provider/preferences_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -13,28 +22,61 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Make Own App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: kTextTheme,
-      ),
-      home: const SplashPage(),
-      navigatorObservers: [routeObserver],
-      onGenerateRoute: (RouteSettings route) {
-        switch (route.name) {
-          case '/main':
-            return MaterialPageRoute(builder: (_) => const MainPage());
-          default:
-            return MaterialPageRoute(builder: (_) {
-              return const Scaffold(
-                body: Center(
-                  child: Text('Page not found :('),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ListMOWProvider(apiService: ApiService(http.Client())),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PreferencesProvider(
+            preferencesHelper: PreferencesHelper(
+              sharedPreferences: SharedPreferences.getInstance(),
+            ),
+          ),
+        ),
+      ],
+      child: Consumer<PreferencesProvider>(
+        builder: (context, state, _) {
+          return MaterialApp(
+            title: 'Make Own App',
+            debugShowCheckedModeBanner: false,
+            theme: state.themeData,
+            builder: (context, child) {
+              return CupertinoTheme(
+                data: CupertinoThemeData(
+                  brightness:
+                      state.isDarkTheme ? Brightness.dark : Brightness.light,
+                ),
+                child: Material(
+                  child: child,
                 ),
               );
-            });
-        }
-      },
+            },
+            navigatorKey: navigatorKey,
+            initialRoute: SplashPage.routeName,
+            routes: {
+              SplashPage.routeName: (context) => const SplashPage(),
+              MainPage.routeName: (context) => const MainPage(),
+            },
+            // home: const SplashPage(),
+            // navigatorObservers: [routeObserver],
+            // onGenerateRoute: (RouteSettings route) {
+            //   switch (route.name) {
+            //     case '/main':
+            //       return MaterialPageRoute(builder: (_) => const MainPage());
+            //     default:
+            //       return MaterialPageRoute(builder: (_) {
+            //         return const Scaffold(
+            //           body: Center(
+            //             child: Text('Page not found :('),
+            //           ),
+            //         );
+            //       });
+            //   }
+            // },
+          );
+        },
+      ),
     );
   }
 }

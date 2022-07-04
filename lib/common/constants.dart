@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 const Color primaryColor = Color(0xFFFFFFFF);
 const Color secondaryColor = Color(0xFF6B38FB);
 const Color darkPrimaryColor = Color(0xFF000000);
-const Color darkSecondaryColor = Color(0xff64ffda);
+const Color darkSecondaryColor = Colors.blue;
 
 const Color kRichBlack = Color(0xFF000814);
 const Color kOxfordBlue = Color(0xFF001D3D);

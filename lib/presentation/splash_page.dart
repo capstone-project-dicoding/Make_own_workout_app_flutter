@@ -3,6 +3,7 @@ import 'package:make_own_workout/presentation/main_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+  static const routeName = '/splash';
 
   @override
   State<SplashPage> createState() => _SplashPageState();
