@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:make_own_workout/common/constants.dart';
-import 'package:make_own_workout/data/preferences/preferences_helper.dart';
+import 'package:make_own_workout/preferences/preferences_helper.dart';
 
 class PreferencesProvider extends ChangeNotifier {
   PreferencesHelper preferencesHelper;

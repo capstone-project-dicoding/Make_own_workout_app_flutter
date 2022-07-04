@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:make_own_workout/common/navigation.dart';
 import 'package:make_own_workout/data/api/api_service.dart';
-import 'package:make_own_workout/data/preferences/preferences_helper.dart';
+import 'package:make_own_workout/preferences/preferences_helper.dart';
 import 'package:make_own_workout/presentation/main_page.dart';
 import 'package:make_own_workout/presentation/splash_page.dart';
 import 'package:make_own_workout/provider/mow_provider.dart';
