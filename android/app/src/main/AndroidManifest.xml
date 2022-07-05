@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.make_own_workout">
    <application
-        android:label="make_own_workout"
+        android:label="MOW"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/splash">
         <activity
             android:name=".MainActivity"
             android:exported="true"

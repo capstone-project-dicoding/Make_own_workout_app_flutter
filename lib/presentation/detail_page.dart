@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:make_own_workout/common/constants.dart';
+import 'package:make_own_workout/model/mow_model.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final Data mow;
+  const DetailPage({Key? key, required this.mow}) : super(key: key);
+  static const routeName = '/detail';
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -12,26 +15,23 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Cat-cow'),
-      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
               children: [
                 Hero(
-                  tag: 'tag',
+                  tag: widget.mow.image!,
                   child: Container(
                     height: 280,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(12),
                         bottomRight: Radius.circular(12),
                       ),
                       image: DecorationImage(
                         image: NetworkImage(
-                          'https://res.cloudinary.com/capstone-project-2022/image/upload/v1656836714/ugmzwaregbsgqpijda3v.jpg',
+                          widget.mow.image!,
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -109,7 +109,7 @@ class _DetailPageState extends State<DetailPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Cat-cow',
+                        widget.mow.name!,
                         style: kTextTheme.titleMedium!.copyWith(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -127,7 +127,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Peregangan yang dinamis, seperti Cat-cow, menggerakkan kelompok otot dengan hari-hati melalui beberapa gerakan berikut.  Satukan jari-jari Anda, letakkan di atas lantai dengan telapak tangan menghadap ke depan. Rentangkan lengan ke depan sejauh yang Anda bisa. Turunkan kepala Anda sambil melengkungkan punggung ke atas. Ini adalah gerakan cat. Tahan hingga sekitar 10 detik. Perlahan-lahan lakukan gerakan yang berlawanan dengan mengangkat kepala Anda sambil melengkungkan punggung Anda ke bawah. Ini disebut gerakan cow. Tahan hingga sekitar 10 detik. Ulangi kembali gerakan yang sama cat-cow dengan repetisi 8 – 10 kali.',
+                    widget.mow.description!,
                     style: kTextTheme.titleMedium!.copyWith(
                       fontSize: 13.5,
                       // fontWeight: FontWeight.bold,

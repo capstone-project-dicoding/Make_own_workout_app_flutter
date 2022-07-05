@@ -62,9 +62,9 @@ class Data {
     data['name'] = name;
     data['image'] = image;
     data['description'] = description;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
-    data['__v'] = iV;
+    // data['createdAt'] = createdAt;
+    // data['updatedAt'] = updatedAt;
+    // data['__v'] = iV;
     return data;
   }
 }

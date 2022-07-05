@@ -16,8 +16,8 @@ class DatabaseProvider extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
-  List<MOWModel> _mow = [];
-  List<MOWModel> get mow => _mow;
+  List<Data> _mow = [];
+  List<Data> get mow => _mow;
 
   void _getAlls() async {
     _mow = await dbHelper.getAlls();
@@ -30,7 +30,7 @@ class DatabaseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addMOW(MOWModel mow) async {
+  void addMOW(Data mow) async {
     try {
       await dbHelper.insertMOW(mow);
       _getAlls();

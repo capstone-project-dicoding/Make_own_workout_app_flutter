@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:make_own_workout/common/navigation.dart';
+import 'package:make_own_workout/common/utils.dart';
 import 'package:make_own_workout/data/api/api_service.dart';
+import 'package:make_own_workout/data/db/db_helper.dart';
+import 'package:make_own_workout/model/mow_model.dart';
 import 'package:make_own_workout/preferences/preferences_helper.dart';
+import 'package:make_own_workout/presentation/detail_page.dart';
 import 'package:make_own_workout/presentation/main_page.dart';
 import 'package:make_own_workout/presentation/splash_page.dart';
+import 'package:make_own_workout/provider/db_provider.dart';
 import 'package:make_own_workout/provider/mow_provider.dart';
 import 'package:make_own_workout/provider/preferences_provider.dart';
 import 'package:provider/provider.dart';
@@ -34,11 +39,14 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        ChangeNotifierProvider(
+          create: (_) => DatabaseProvider(dbHelper: DBHelper()),
+        ),
       ],
       child: Consumer<PreferencesProvider>(
         builder: (context, state, _) {
           return MaterialApp(
-            title: 'Make Own App',
+            title: 'Make Own Workout',
             debugShowCheckedModeBanner: false,
             theme: state.themeData,
             builder: (context, child) {
@@ -57,13 +65,22 @@ class MyApp extends StatelessWidget {
             routes: {
               SplashPage.routeName: (context) => const SplashPage(),
               MainPage.routeName: (context) => const MainPage(),
+              DetailPage.routeName: (context) => DetailPage(
+                  mow: ModalRoute.of(context)?.settings.arguments as Data),
             },
-            // home: const SplashPage(),
-            // navigatorObservers: [routeObserver],
+            navigatorObservers: [routeObserver],
             // onGenerateRoute: (RouteSettings route) {
             //   switch (route.name) {
             //     case '/main':
             //       return MaterialPageRoute(builder: (_) => const MainPage());
+            //     case SplashPage.routeName:
+            //       return MaterialPageRoute(builder: (_) => const SplashPage());
+            //     case DetailPage.routeName:
+            //       return MaterialPageRoute(
+            //         builder: (_) => DetailPage(
+            //           mow: ModalRoute.of(context)?.settings.arguments as Data,
+            //         ),
+            //       );
             //     default:
             //       return MaterialPageRoute(builder: (_) {
             //         return const Scaffold(

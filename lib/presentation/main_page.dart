@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:make_own_workout/common/constants.dart';
 import 'package:make_own_workout/presentation/favorite_page.dart';
 import 'package:make_own_workout/presentation/home_page.dart';
 import 'package:make_own_workout/presentation/setting_page.dart';
@@ -54,7 +53,6 @@ class _MainPageState extends State<MainPage> {
       body: _listWidget[_bottomNavIndex],
       bottomNavigationBar: Consumer<PreferencesProvider>(
         builder: (context, state, child) {
-          print(state.isDarkTheme);
           return Container(
             color: state.isDarkTheme ? Colors.black : Colors.blue,
             padding: const EdgeInsets.symmetric(
@@ -62,12 +60,9 @@ class _MainPageState extends State<MainPage> {
               vertical: 10.0,
             ),
             child: GNav(
-              // backgroundColor: state.isDarkTheme ? Colors.white : Colors.blue,
               color: state.isDarkTheme ? Colors.blue : Colors.black,
               activeColor: state.isDarkTheme ? Colors.white : Colors.blue,
-              // Colors.blue,
               tabBackgroundColor: state.isDarkTheme ? Colors.blue : Colors.white,
-              // Colors.black,
               gap: 5,
               padding: const EdgeInsets.all(8),
               tabs: _bottomNavBarItems,

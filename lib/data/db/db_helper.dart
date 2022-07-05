@@ -19,7 +19,7 @@ class DBHelper {
       '$path/mow_app.db',
       onCreate: (db, version) async {
         await db.execute('''CREATE TABLE $_tblApp (
-             id TEXT PRIMARY KEY,
+             _id TEXT PRIMARY KEY,
              name TEXT,
              image TEXT,
              description TEXT
@@ -38,16 +38,16 @@ class DBHelper {
     return _database;
   }
 
-  Future<void> insertMOW(MOWModel mow) async {
+  Future<void> insertMOW(Data mow) async {
     final db = await database;
     await db!.insert(_tblApp, mow.toJson());
   }
 
-  Future<List<MOWModel>> getAlls() async {
+  Future<List<Data>> getAlls() async {
     final db = await database;
     List<Map<String, dynamic>> results = await db!.query(_tblApp);
 
-    return results.map((mow) => MOWModel.fromJson(mow)).toList();
+    return results.map((mow) => Data.fromJson(mow)).toList();
   }
 
   Future<Map> getMOWById(String id) async {
@@ -55,7 +55,7 @@ class DBHelper {
 
     List<Map<String, dynamic>> results = await db!.query(
       _tblApp,
-      where: 'id = ?',
+      where: '_id = ?',
       whereArgs: [id],
     );
 
@@ -71,7 +71,7 @@ class DBHelper {
 
     await db!.delete(
       _tblApp,
-      where: 'id = ?',
+      where: '_id = ?',
       whereArgs: [id],
     );
   }

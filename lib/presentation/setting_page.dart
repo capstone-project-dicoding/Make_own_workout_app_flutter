@@ -34,7 +34,7 @@ class SettingPage extends StatelessWidget {
                   style: kTextTheme.titleMedium!.copyWith(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                  )
+                  ),
                 ),
               ),
               _list(context),
