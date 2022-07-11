@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:make_own_workout/common/constants.dart';
+import 'package:make_own_workout/provider/db_provider.dart';
 import 'package:make_own_workout/provider/mow_provider.dart';
 import 'package:make_own_workout/widgets/card_mow.dart';
 import 'package:make_own_workout/widgets/platform_widget.dart';
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
 
+  static const routeName = '/favorite';
   static const String title = 'Favorite';
 
   @override
@@ -61,32 +63,23 @@ class _FavoritePageState extends State<FavoritePage> {
   }
 
   Widget _list(BuildContext context) {
-    return Consumer<ListMOWProvider>(
-      builder: (context, state, _) {
-        if (state.resultState == ResultState.loading) {
-          return const Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 1.5,
-            ),
-          );
-        } else if (state.resultState == ResultState.hasData) {
+    return Consumer<DatabaseProvider>(
+      builder: (context, provider, child) {
+        if (provider.state == ResultState.hasData) {
           return ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: state.mowModel.data!.length,
+            itemCount: provider.favorite.length,
             itemBuilder: (context, index) {
-              var mow = state.mowModel.data![index];
               return CardMOW(
-                mow: mow,
+                mow: provider.favorite[index],
+                // onPressed: () {},
               );
             },
           );
-        } else if (state.resultState == ResultState.noData) {
-          return Center(child: Text(state.msg));
-        } else if (state.resultState == ResultState.error) {
-          return Center(child: Text(state.msg));
         } else {
-          return const Center(child: Text(''));
+          return Center(
+            child: Text(provider.message),
+          );
         }
       },
     );

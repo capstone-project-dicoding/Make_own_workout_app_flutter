@@ -7,7 +7,9 @@ import 'package:make_own_workout/data/db/db_helper.dart';
 import 'package:make_own_workout/model/mow_model.dart';
 import 'package:make_own_workout/preferences/preferences_helper.dart';
 import 'package:make_own_workout/presentation/detail_page.dart';
+import 'package:make_own_workout/presentation/favorite_page.dart';
 import 'package:make_own_workout/presentation/main_page.dart';
+import 'package:make_own_workout/presentation/search_page.dart';
 import 'package:make_own_workout/presentation/splash_page.dart';
 import 'package:make_own_workout/provider/db_provider.dart';
 import 'package:make_own_workout/provider/mow_provider.dart';
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
             initialRoute: SplashPage.routeName,
             routes: {
               SplashPage.routeName: (context) => const SplashPage(),
+              FavoritePage.routeName: (context) => const FavoritePage(),
+              SearchPage.routeName: (context) => const SearchPage(),
               MainPage.routeName: (context) => const MainPage(),
               DetailPage.routeName: (context) => DetailPage(
                   mow: ModalRoute.of(context)?.settings.arguments as Data),

@@ -17,7 +17,7 @@ class DatabaseProvider extends ChangeNotifier {
   String get message => _message;
 
   List<Data> _mow = [];
-  List<Data> get mow => _mow;
+  List<Data> get favorite => _mow;
 
   void _getAlls() async {
     _mow = await dbHelper.getAlls();

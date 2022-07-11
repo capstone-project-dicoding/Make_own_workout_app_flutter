@@ -140,33 +140,33 @@ class _DetailPageState extends State<DetailPage> {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        height: 50,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                'Previous',
-                style: kTextTheme.titleMedium!.copyWith(
-                  fontSize: 15,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                'Next',
-                style: kTextTheme.titleMedium!.copyWith(
-                  fontSize: 15,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      // bottomNavigationBar: Container(
+      //   padding: const EdgeInsets.symmetric(horizontal: 25),
+      //   height: 50,
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       ElevatedButton(
+      //         onPressed: () {},
+      //         child: Text(
+      //           'Previous',
+      //           style: kTextTheme.titleMedium!.copyWith(
+      //             fontSize: 15,
+      //           ),
+      //         ),
+      //       ),
+      //       ElevatedButton(
+      //         onPressed: () {},
+      //         child: Text(
+      //           'Next',
+      //           style: kTextTheme.titleMedium!.copyWith(
+      //             fontSize: 15,
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

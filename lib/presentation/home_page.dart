@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:make_own_workout/common/constants.dart';
+import 'package:make_own_workout/presentation/search_page.dart';
 import 'package:make_own_workout/provider/mow_provider.dart';
 import 'package:make_own_workout/widgets/card_mow.dart';
 import 'package:make_own_workout/widgets/platform_widget.dart';
@@ -171,7 +172,7 @@ class _HomePageState extends State<HomePage> {
             Stack(
               children: [
                 Container(
-                  height: 200,
+                  height: 220,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
@@ -184,12 +185,28 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: SafeArea(
-                    child: Container(
-                      height: 55,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          width: 1,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, SearchPage.routeName);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(width: 1),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.search),
+                            const SizedBox(width: 10),
+                            Text(
+                              'Search title',
+                              style: kTextTheme.titleMedium!.copyWith(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
