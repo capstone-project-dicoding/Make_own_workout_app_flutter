@@ -1,13 +1,15 @@
 // ignore: unnecessary_import
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:make_own_workout/common/constants.dart';
 import 'package:make_own_workout/presentation/search_page.dart';
 import 'package:make_own_workout/provider/mow_provider.dart';
 import 'package:make_own_workout/widgets/card_mow.dart';
 import 'package:make_own_workout/widgets/platform_widget.dart';
 import 'package:provider/provider.dart';
-// import 'colores.dart' as color;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +21,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  String? _name;
+
+  getData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    await _firestore.collection('users').doc(user!.uid).get().then((value) {
+      var name = value.data()!['name'].toString();
+      _name = name;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // return Scaffold(
@@ -215,12 +235,27 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Container(
-              height: 80,
+              height: 100,
               alignment: Alignment.bottomLeft,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  FutureBuilder(
+                    future: getData(),
+                    builder: (ctx, sn) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          'Hai, $_name ',
+                          style: kTextTheme.titleMedium!.copyWith(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                   ListTile(
                     title: Text(
                       HomePage.title,
@@ -249,7 +284,7 @@ class _HomePageState extends State<HomePage> {
   Widget iosBuilder(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('Favorite Page'),
+        middle: Text('Home Page'),
       ),
       child: _list(context),
     );
@@ -279,7 +314,16 @@ class _HomePageState extends State<HomePage> {
         } else if (state.resultState == ResultState.noData) {
           return Center(child: Text(state.msg));
         } else if (state.resultState == ResultState.error) {
-          return Center(child: Text(state.msg));
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Lottie.asset(
+                'assets/unconnect.json',
+                height: 300,
+              ),
+              Center(child: Text(state.msg)),
+            ],
+          );
         } else {
           return const Center(child: Text(''));
         }

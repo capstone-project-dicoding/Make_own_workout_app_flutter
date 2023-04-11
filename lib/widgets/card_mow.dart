@@ -35,12 +35,40 @@ class CardMOW extends StatelessWidget {
                     ? IconButton(
                         icon: const Icon(Icons.favorite),
                         color: Colors.red,
-                        onPressed: () => state.removeMOW(mow.sId!),
+                        onPressed: () {
+                          state.removeMOW(mow.sId!);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text(
+                                'Delete Favorite Workout',
+                                textAlign: TextAlign.center,
+                                style: kSubtitle.copyWith(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       )
                     : IconButton(
-                        icon: const Icon(Icons.bookmark_border),
+                        icon: const Icon(Icons.favorite_border),
                         color: Colors.blue,
-                        onPressed: () => state.addMOW(mow),
+                        onPressed: () {
+                          state.addMOW(mow);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.green,
+                              content: Text(
+                                'Favorited Workout',
+                                textAlign: TextAlign.center,
+                                style: kSubtitle.copyWith(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                 title: Text(mow.name!),
                 subtitle: Text(mow.name!),

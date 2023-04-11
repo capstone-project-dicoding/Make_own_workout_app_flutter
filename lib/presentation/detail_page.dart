@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:make_own_workout/common/constants.dart';
 import 'package:make_own_workout/model/mow_model.dart';
+import 'package:make_own_workout/provider/db_provider.dart';
+import 'package:provider/provider.dart';
 
 class DetailPage extends StatefulWidget {
   final Data mow;
@@ -115,6 +117,62 @@ class _DetailPageState extends State<DetailPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      Consumer<DatabaseProvider>(builder: (context, state, _) {
+                        return FutureBuilder<bool>(
+                          future: state.isFavorited(widget.mow.sId!),
+                          builder: (ctx, sn) {
+                            var isFavorited = sn.data ?? false;
+                            return isFavorited
+                                ? IconButton(
+                                    icon: const Icon(Icons.favorite),
+                                    color: Colors.red,
+                                    onPressed: () {
+                                      state.removeMOW(widget.mow.sId!);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          backgroundColor: Colors.red,
+                                          content: Text(
+                                            'Delete Favorite Workout',
+                                            textAlign: TextAlign.center,
+                                            style: kSubtitle.copyWith(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : IconButton(
+                                    icon: const Icon(Icons.favorite_border),
+                                    color: Colors.blue,
+                                    onPressed: () {
+                                      state.addMOW(widget.mow);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          backgroundColor: Colors.green,
+                                          content: Text(
+                                            'Favorited Workout',
+                                            textAlign: TextAlign.center,
+                                            style: kSubtitle.copyWith(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                          },
+                        );
+                      })
+                      // IconButton(
+                      //   onPressed: () {},
+                      //   icon: Icon(
+                      //     Icons.favorite,
+                      //     color: Colors.red,
+                      //   ),
+                      // )
                     ],
                   ),
                   const SizedBox(height: 15),

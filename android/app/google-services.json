@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "202760172079",
+    "project_id": "capstone-project-2022-6e107",
+    "storage_bucket": "capstone-project-2022-6e107.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202760172079:android:89aade2be8b64515dcccda",
+        "android_client_info": {
+          "package_name": "com.example.make_own_workout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202760172079-og042h5ftarcunqbd3jt4jl4rvupfll4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZRb-FcX1r8R6NiHiEUq57qHAqO4hMEw8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202760172079-og042h5ftarcunqbd3jt4jl4rvupfll4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:make_own_workout/common/constants.dart';
 import 'package:make_own_workout/provider/db_provider.dart';
 import 'package:make_own_workout/provider/mow_provider.dart';
@@ -78,7 +79,20 @@ class _FavoritePageState extends State<FavoritePage> {
           );
         } else {
           return Center(
-            child: Text(provider.message),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height - 250,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset(
+                    'assets/empty.json',
+                    height: 150,
+                  ),
+                  const SizedBox(height: 50),
+                  Text(provider.message, textAlign: TextAlign.center),
+                ],
+              ),
+            ),
           );
         }
       },
